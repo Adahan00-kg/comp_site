@@ -181,6 +181,6 @@ class DVD_drive_elementViewSet(viewsets.ModelViewSet):
     queryset = DVD_drive_element.objects.all()
     serializer_class = DVD_drive_elementSerializer
 
-class MainCompViewSet(viewsets.ModelViewSet):
-    queryset = MainComp.objects.all()
+class ShowcompViewSet(viewsets.ModelViewSet):
+    queryset = Showcomp.objects.all()
     serializer_class = MainCompSerializer

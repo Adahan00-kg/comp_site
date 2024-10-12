@@ -502,7 +502,7 @@ class Manitor_element(models.Model):
         return self.manitor_element_name
 
 
-class MainComp(models.Model):
+class CompChoices(models.Model):
     procecor = models.ForeignKey(Processor_category,on_delete=models.CASCADE,verbose_name='процессор',null=True,blank=True)
     cooling = models.ForeignKey(Cooling_category,on_delete=models.CASCADE,verbose_name='охлождения',null=True,blank=True)
     memory = models.ForeignKey(Random_access_memory_category,on_delete=models.CASCADE,verbose_name='оперативнная памят',null=True,blank=True)
@@ -521,3 +521,25 @@ class MainComp(models.Model):
     keyboard = models.ForeignKey(Keyboard_category,on_delete=models.CASCADE,verbose_name='клавиатура',null=True,blank=True)
     manitor = models.ForeignKey(Manitor_category,on_delete=models.CASCADE,verbose_name='манитор',null=True,blank=True)
     headset = models.ForeignKey(Headset_category,on_delete=models.CASCADE,verbose_name='гарнитура',null=True,blank=True)
+
+
+
+class Showcomp(models.Model):
+    procecor = models.ManyToManyField(Processor_category,verbose_name='процессор',null=True,blank=True)
+    cooling = models.ManyToManyField(Cooling_category,verbose_name='охлождения',null=True,blank=True)
+    memory = models.ManyToManyField(Random_access_memory_category,verbose_name='оперативнная памят',null=True,blank=True)
+    motherboard = models.ManyToManyField(The_motherboard_category,verbose_name='Материнская плата',null=True,blank=True)
+    video_card = models.ManyToManyField(Video_card_category,verbose_name='видео карта',null=True,blank=True)
+    hard_drive = models.ManyToManyField(Hard_drive_category,verbose_name='жесткий диск',null=True,blank=True)
+    ssd_drive_1 = models.ManyToManyField(SSD_drive_1_category,verbose_name='SSD диск 1',null=True,blank=True)
+    ssd_drive_2 = models.ManyToManyField(SSD_drive_2_category,verbose_name='SSD диск 2',null=True,blank=True)
+    dvd_drive = models.ManyToManyField(DVD_drive_category,verbose_name='DVD привод',null=True,blank=True)
+    body_category = models.ManyToManyField(Body_category,verbose_name='корпус',null=True,blank=True)
+    power_unit = models.ManyToManyField(Power_unit_category,verbose_name='блок питания',null=True,blank=True)
+    wi_fi = models.ManyToManyField(Wi_Fi_category,verbose_name='wi-fi',null=True,blank=True)
+    sound_card = models.ManyToManyField(Sound_card_category,verbose_name='звуковая карта',null=True,blank=True)
+    operating_system = models.ManyToManyField(Operating_system_category,verbose_name='Операционнвя система',null=True,blank=True)
+    mouse = models.ManyToManyField(Mouse_catergory,verbose_name='мышь',null=True,blank=True)
+    keyboard = models.ManyToManyField(Keyboard_category,verbose_name='клавиатура',null=True,blank=True)
+    manitor = models.ManyToManyField(Manitor_category,verbose_name='манитор',null=True,blank=True)
+    headset = models.ManyToManyField(Headset_category,verbose_name='гарнитура',null=True,blank=True)

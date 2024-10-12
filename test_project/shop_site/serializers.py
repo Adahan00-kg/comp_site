@@ -22,7 +22,7 @@ class Processor_elementSerializer(serializers.ModelSerializer):
                   'price', 'processor_image']
 
 class Processor_categorySerializer(serializers.ModelSerializer):
-    middle_processor_conaction = Processor_elementSimpleSerializer(read_only=True, many=True)
+    middle_processor_conaction = Processor_elementSerializer(read_only=True, many=True)
 
     class Meta:
         model = Processor_category
@@ -473,7 +473,7 @@ class Manitor_categorySerializer(serializers.ModelSerializer):
 class Manitor_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manitor_category
-        fields = ['manitor_category']
+        fields = ['manitor_category_name']
 
 class Headset_elemenListtSerializer(serializers.ModelSerializer):
     class Meta:
@@ -511,7 +511,7 @@ class Headset_categorySerializerList(serializers.ModelSerializer):
 
 
 class MainCompSerializer(serializers.ModelSerializer):
-    procecor = Processor_categorySimpleSerializer(many=True)
+    procecor = Processor_categorySerializer(many=True)
     cooling = Cooling_categorySimpleSerializer(many=True)
     memory = Random_access_memory_categorySimpleSerializer(many=True)
     motherboard = The_motherboard_categorySimpleSerializer(many=True)
@@ -520,7 +520,7 @@ class MainCompSerializer(serializers.ModelSerializer):
     ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
     ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
     dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
-    body_category = Body_categorySerializer()
+    body_category = Body_categorySerializerList(many=True)
     power_unit = Power_unit_categorySerializerList(many=True)
     wi_fi = Wi_Fi_categorySerializerList(many=True)
     sound_card = Sound_card_categorySerializerList(many=True)
@@ -531,5 +531,32 @@ class MainCompSerializer(serializers.ModelSerializer):
     headset = Headset_categorySerializerList(many=True)
 
     class Meta:
-        model = MainComp
+        model = Showcomp
         fields = '__all__'
+
+
+class CompChoicesSerializer(serializers.ModelSerializer):
+    procecor = Processor_categorySimpleSerializer(many=True)
+    cooling = Cooling_categorySimpleSerializer(many=True)
+    memory = Random_access_memory_categorySimpleSerializer(many=True)
+    motherboard = The_motherboard_categorySimpleSerializer(many=True)
+    video_card = Video_card_categorySimpleSerializer(many=True)
+    hard_drive = Hard_drive_categorySimpleSerializer(many=True)
+    ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
+    ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
+    dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
+    body_category = Body_categorySerializerList(many=True)
+    power_unit = Power_unit_categorySerializerList(many=True)
+    wi_fi = Wi_Fi_categorySerializerList(many=True)
+    sound_card = Sound_card_categorySerializerList(many=True)
+    operating_system = Operating_system_categorySerializerList(many=True)
+    mouse = Mouse_catergorySerializerList(many=True)
+    keyboard = Keyboard_categorySerializerList(many=True)
+    manitor = Manitor_categoryListSerializer(many=True)
+    headset = Headset_categorySerializerList(many=True)
+
+    class Meta:
+        model = CompChoices
+        fields = '__all__'
+
+

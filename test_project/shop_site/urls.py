@@ -3,7 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('',MainCompViewSet.as_view({'get':'list'}),name = 'main_list'),
+    path('',ShowcompViewSet.as_view({'get':'list'}),name = 'main_list'),
 
 
     path('body/', Body_categoryViewSet.as_view({'get': 'list'}), name='body_list'),

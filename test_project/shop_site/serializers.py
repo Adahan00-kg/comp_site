@@ -22,7 +22,7 @@ class Processor_elementSerializer(serializers.ModelSerializer):
                   'price', 'processor_image']
 
 class Processor_categorySerializer(serializers.ModelSerializer):
-    middle_processor_conaction = Processor_elementSerializer(read_only=True, many=True)
+    middle_processor_conaction = Processor_elementSimpleSerializer(read_only=True, many=True)
 
     class Meta:
         model = Processor_category
@@ -223,13 +223,14 @@ class SSD_drive_2_categorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SSD_drive_2_category
-        fields = ['id', 'ssd_drive_2_category_name', 'middle_ssd_2_conaction']
+        fields = ['id', 'ssd_2_category_name', 'middle_ssd_2_conaction']
+
 
 class SSD_drive_2_categorySimpleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SSD_drive_2_category
-        fields = ['ssd_drive_2_category_name']
+        fields = ['ssd_2_category_name']
 
 
 
@@ -260,7 +261,7 @@ class DVD_drive_categorySimpleSerializer(serializers.ModelSerializer):
         fields = ['dvd_drive_category_name']
 
 
-class Body_elementSerializerList(serializers.ModelSerializer):
+class Body_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Body_element
         fields = ['name_element_body','body_price']
@@ -276,19 +277,19 @@ class Body_elementSerializer(serializers.ModelSerializer):
 
 
 class Body_categorySerializer(serializers.ModelSerializer):
-    middle_body_conaction = Body_elementSerializerList(read_only=True,many=True)
+    middle_body_conaction = Body_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Body_category
         fields = ['body_category_name','middle_body_conaction']
 
 
-class Body_categorySerializerList(serializers.ModelSerializer):
+class Body_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Body_category
         fields = ['body_category_name']
 
 
-class Power_unit_elementSerializerList(serializers.ModelSerializer):
+class Power_unit_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Power_unit_element
         fields = ['power_unit_element_name','power_unit_price']
@@ -302,19 +303,19 @@ class Power_unit_elementSerializer(serializers.ModelSerializer):
 
 
 class Power_unit_categorySerializer(serializers.ModelSerializer):
-    middle_power_unit_conaction = Power_unit_elementSerializerList(read_only=True,many=True)
+    middle_power_unit_conaction = Power_unit_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Power_unit_category
         fields = ['power_unit_category_name','middle_power_unit_conaction']
 
 
-class Power_unit_categorySerializerList(serializers.ModelSerializer):
+class Power_unit_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Power_unit_category
         fields = ['power_unit_category_name']
 
 
-class Wi_Fi_elementerSerializersList(serializers.ModelSerializer):
+class Wi_Fi_elementerListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Wi_Fi_element
         fields = ['wi_fi_element_name','wi_fi_price']
@@ -329,19 +330,19 @@ class  Wi_Fi_elementerSerializers(serializers.ModelSerializer):
 
 
 class Wi_Fi_categorySerializer(serializers.ModelSerializer):
-    wi_fi_middle_conaction = Wi_Fi_elementerSerializers(read_only=True,many=True)
+    wi_fi_middle_conaction = Wi_Fi_elementerListSerializers(read_only=True,many=True)
     class Meta:
         model = Wi_Fi_category
         fields = ['wi_fi_category_name','wi_fi_middle_conaction']
 
 
-class Wi_Fi_categorySerializerList(serializers.ModelSerializer):
+class Wi_Fi_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wi_Fi_category
         fields = ['wi_fi_category_name']
 
 
-class Sound_card_elementSerializerList(serializers.ModelSerializer):
+class Sound_card_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sound_card_element
         fields = ['sound_name','sound_price']
@@ -353,20 +354,22 @@ class Sound_card_elementSerializer(serializers.ModelSerializer):
                   'sound_type','sound_img','connection_type',
                   'multi_audio','input_connectors','microphone_inputs']
 
+
+
 class Sound_card_categorySerializer(serializers.ModelSerializer):
-    sound_middle_conaction = Sound_card_elementSerializer(read_only=True,many=True)
+    sound_middle_conaction = Sound_card_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Sound_card_category
         fields = ['sound_category_name','sound_middle_conaction']
 
 
-class Sound_card_categorySerializerList(serializers.ModelSerializer):
+class Sound_card_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Sound_card_categorySerializer
+        model = Sound_card_category
         fields = ['sound_category_name']
 
 
-class Operating_system_elementSerializerList(serializers.ModelSerializer):
+class Operating_system_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Operating_system_element
         fields = ['operating_element_name','operating_price']
@@ -380,19 +383,19 @@ class Operating_system_elementSerializer(serializers.ModelSerializer):
 
 
 class Operating_system_categorySerializer(serializers.ModelSerializer):
-    middle_operation_conaction = Operating_system_elementSerializer(read_only=True,many=True)
+    middle_operation_conaction = Operating_system_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Operating_system_category
         fields = ['operating_system_name','middle_operation_conaction']
 
 
-class Operating_system_categorySerializerList(serializers.ModelSerializer):
+class Operating_system_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Operating_system_category
         fields = ['operating_system_name']
 
 
-class Mouse_elementSerializerList(serializers.ModelSerializer):
+class Mouse_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mouse_element
         fields = ['mouse_element_name','mouse_price']
@@ -409,19 +412,19 @@ class Mouse_elementSerializer(serializers.ModelSerializer):
 
 
 class Mouse_catergorySerializer(serializers.ModelSerializer):
-    middle_mouse_conaction = Mouse_elementSerializer(read_only=True,many=True)
+    middle_mouse_conaction = Mouse_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Mouse_catergory
         fields = ['mouse_category_name','middle_mouse_conaction']
 
 
-class Mouse_catergorySerializerList(serializers.ModelSerializer):
+class Mouse_catergoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mouse_catergory
         fields = ['mouse_category_name']
 
 
-class Keyboard_elementSerializerList(serializers.ModelSerializer):
+class Keyboard_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keyboard_element
         fields = ['keyboard_element_name','keyboard_price']
@@ -436,19 +439,19 @@ class Keyboard_elementSerializer(serializers.ModelSerializer):
 
 
 class Keyboard_categorySerializer(serializers.ModelSerializer):
-    middle_keyboard_conaction = Keyboard_elementSerializer(read_only=True,many=True)
+    middle_keyboard_conaction = Keyboard_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Keyboard_category
         fields = ['keyboard_category_name','middle_keyboard_conaction']
 
 
-class Keyboard_categorySerializerList(serializers.ModelSerializer):
+class Keyboard_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keyboard_category
         fields = ['keyboard_category_name']
 
 
-class Manitor_elementSerializerList(serializers.ModelSerializer):
+class Manitor_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manitor_element
         fields = ['manitor_element_name','manitor_price']
@@ -464,10 +467,10 @@ class Manitor_elementSerializer(serializers.ModelSerializer):
 
 
 class Manitor_categorySerializer(serializers.ModelSerializer):
-    middle_manitor_conaction = Manitor_elementSerializer(read_only=True,many=True)
+    middle_manitor_conaction = Manitor_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Manitor_category
-        fields = ['manitor_category','middle_manitor_conaction']
+        fields = ['manitor_category_name','middle_manitor_conaction']
 
 
 class Manitor_categoryListSerializer(serializers.ModelSerializer):
@@ -475,7 +478,7 @@ class Manitor_categoryListSerializer(serializers.ModelSerializer):
         model = Manitor_category
         fields = ['manitor_category_name']
 
-class Headset_elemenListtSerializer(serializers.ModelSerializer):
+class Headset_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Headset_element
         fields = ['the_headset_element_name','headset_price']
@@ -498,12 +501,12 @@ class Headset_elementSerializer(serializers.ModelSerializer):
 
 
 class Headset_categorySerializer(serializers.ModelSerializer):
-    middle_the_headset_conaction = Headset_elemenListtSerializer(read_only=True,many=True)
+    middle_the_headset_conaction = Headset_elementListSerializer(read_only=True,many=True)
     class Meta:
         model = Headset_category
-        fields = ['the_headset_name','price']
+        fields = ['the_headset_name','middle_the_headset_conaction']
 
-class Headset_categorySerializerList(serializers.ModelSerializer):
+class Headset_categoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Headset_category
         fields = ['the_headset_name']
@@ -511,24 +514,6 @@ class Headset_categorySerializerList(serializers.ModelSerializer):
 
 
 class MainCompSerializer(serializers.ModelSerializer):
-    procecor = Processor_categorySerializer(many=True)
-    cooling = Cooling_categorySimpleSerializer(many=True)
-    memory = Random_access_memory_categorySimpleSerializer(many=True)
-    motherboard = The_motherboard_categorySimpleSerializer(many=True)
-    video_card = Video_card_categorySimpleSerializer(many=True)
-    hard_drive = Hard_drive_categorySimpleSerializer(many=True)
-    ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
-    ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
-    dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
-    body_category = Body_categorySerializerList(many=True)
-    power_unit = Power_unit_categorySerializerList(many=True)
-    wi_fi = Wi_Fi_categorySerializerList(many=True)
-    sound_card = Sound_card_categorySerializerList(many=True)
-    operating_system = Operating_system_categorySerializerList(many=True)
-    mouse = Mouse_catergorySerializerList(many=True)
-    keyboard = Keyboard_categorySerializerList(many=True)
-    manitor = Manitor_categoryListSerializer(many=True)
-    headset = Headset_categorySerializerList(many=True)
 
     class Meta:
         model = Showcomp
@@ -545,15 +530,15 @@ class CompChoicesSerializer(serializers.ModelSerializer):
     ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
     ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
     dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
-    body_category = Body_categorySerializerList(many=True)
-    power_unit = Power_unit_categorySerializerList(many=True)
-    wi_fi = Wi_Fi_categorySerializerList(many=True)
-    sound_card = Sound_card_categorySerializerList(many=True)
-    operating_system = Operating_system_categorySerializerList(many=True)
-    mouse = Mouse_catergorySerializerList(many=True)
-    keyboard = Keyboard_categorySerializerList(many=True)
+    body_category = Body_categoryListSerializer(many=True)
+    power_unit = Power_unit_categoryListSerializer(many=True)
+    wi_fi = Wi_Fi_categoryListSerializer(many=True)
+    sound_card = Sound_card_categoryListSerializer(many=True)
+    operating_system = Operating_system_categoryListSerializer(many=True)
+    mouse = Mouse_catergoryListSerializer(many=True)
+    keyboard = Keyboard_categoryListSerializer(many=True)
     manitor = Manitor_categoryListSerializer(many=True)
-    headset = Headset_categorySerializerList(many=True)
+    headset = Headset_categoryListSerializer(many=True)
 
     class Meta:
         model = CompChoices

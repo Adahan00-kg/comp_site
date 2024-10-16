@@ -3,6 +3,10 @@ from .views import *
 
 
 urlpatterns = [
+    path('register/', RegisterView.as_view(), name='register_list'),
+    path('login/', CustomLoginView.as_view(), name='login_list'),
+    path('logout/', LogoutView.as_view(), name='logout_list'),
+
     path('',ShowcompViewSet.as_view({'get':'list'}),name = 'main_list'),
 
 
@@ -94,5 +98,9 @@ urlpatterns = [
     path('ssd_drive_2/<int:pk>/', SSD_drive_2_categoryViewSet.as_view({'get': 'retrieve'}), name='ssd_drive_2_list'),
     path('ssd_drive_2_element/<int:pk>/', SSD_drive_2_elementViewSet.as_view({'get': 'retrieve'}), name='ssd_drive_2_element'),
 
+    path('cart/', CartViewSet.as_view({'get': 'retrieve'}), name='cart_detail'),
+
+    path('cart_items/', CartItemViewSet.as_view({'get': 'list', 'post': 'create'}), name='cart_item_list'),
+    path('cart_items/<int:pk>/', CartItemViewSet.as_view({'put': 'update', 'delete': 'destroy'})),
 
 ]

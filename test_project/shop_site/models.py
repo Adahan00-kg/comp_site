@@ -1,4 +1,19 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+
+class UserProfile(AbstractUser):
+    age = models.PositiveSmallIntegerField(default=0, null=True, blank=True,
+                                           validators=[MinValueValidator(18), MaxValueValidator(100)])
+    phone_number = PhoneNumberField(null=True, blank=True, region='KG')
+    password = models.CharField(max_length=100)
+    date_register = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.username
 
 
 class Processor_category(models.Model):   #Процессор
@@ -525,21 +540,41 @@ class CompChoices(models.Model):
 
 
 class Showcomp(models.Model):
-    procecor = models.ManyToManyField(Processor_category,verbose_name='процессор',null=True,blank=True)
-    cooling = models.ManyToManyField(Cooling_category,verbose_name='охлождения',null=True,blank=True)
-    memory = models.ManyToManyField(Random_access_memory_category,verbose_name='оперативнная памят',null=True,blank=True)
-    motherboard = models.ManyToManyField(The_motherboard_category,verbose_name='Материнская плата',null=True,blank=True)
-    video_card = models.ManyToManyField(Video_card_category,verbose_name='видео карта',null=True,blank=True)
-    hard_drive = models.ManyToManyField(Hard_drive_category,verbose_name='жесткий диск',null=True,blank=True)
-    ssd_drive_1 = models.ManyToManyField(SSD_drive_1_category,verbose_name='SSD диск 1',null=True,blank=True)
-    ssd_drive_2 = models.ManyToManyField(SSD_drive_2_category,verbose_name='SSD диск 2',null=True,blank=True)
-    dvd_drive = models.ManyToManyField(DVD_drive_category,verbose_name='DVD привод',null=True,blank=True)
-    body_category = models.ManyToManyField(Body_category,verbose_name='корпус',null=True,blank=True)
-    power_unit = models.ManyToManyField(Power_unit_category,verbose_name='блок питания',null=True,blank=True)
-    wi_fi = models.ManyToManyField(Wi_Fi_category,verbose_name='wi-fi',null=True,blank=True)
-    sound_card = models.ManyToManyField(Sound_card_category,verbose_name='звуковая карта',null=True,blank=True)
-    operating_system = models.ManyToManyField(Operating_system_category,verbose_name='Операционнвя система',null=True,blank=True)
-    mouse = models.ManyToManyField(Mouse_catergory,verbose_name='мышь',null=True,blank=True)
-    keyboard = models.ManyToManyField(Keyboard_category,verbose_name='клавиатура',null=True,blank=True)
-    manitor = models.ManyToManyField(Manitor_category,verbose_name='манитор',null=True,blank=True)
-    headset = models.ManyToManyField(Headset_category,verbose_name='гарнитура',null=True,blank=True)
+    procecor = models.ManyToManyField(Processor_category,verbose_name='процессор')
+    cooling = models.ManyToManyField(Cooling_category,verbose_name='охлождения')
+    memory = models.ManyToManyField(Random_access_memory_category,verbose_name='оперативнная памят')
+    motherboard = models.ManyToManyField(The_motherboard_category,verbose_name='Материнская плата')
+    video_card = models.ManyToManyField(Video_card_category,verbose_name='видео карта')
+    hard_drive = models.ManyToManyField(Hard_drive_category,verbose_name='жесткий диск')
+    ssd_drive_1 = models.ManyToManyField(SSD_drive_1_category,verbose_name='SSD диск 1')
+    ssd_drive_2 = models.ManyToManyField(SSD_drive_2_category,verbose_name='SSD диск 2')
+    dvd_drive = models.ManyToManyField(DVD_drive_category,verbose_name='DVD привод')
+    body_category = models.ManyToManyField(Body_category,verbose_name='корпус')
+    power_unit = models.ManyToManyField(Power_unit_category,verbose_name='блок питания')
+    wi_fi = models.ManyToManyField(Wi_Fi_category,verbose_name='wi-fi')
+    sound_card = models.ManyToManyField(Sound_card_category,verbose_name='звуковая карта')
+    operating_system = models.ManyToManyField(Operating_system_category,verbose_name='Операционнвя система')
+    mouse = models.ManyToManyField(Mouse_catergory,verbose_name='мышь')
+    keyboard = models.ManyToManyField(Keyboard_category,verbose_name='клавиатура')
+    manitor = models.ManyToManyField(Manitor_category,verbose_name='манитор')
+    headset = models.ManyToManyField(Headset_category,verbose_name='гарнитура')
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(UserProfile, related_name='cart', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user}'
+
+    def get_total_price(self):
+        return sum(item.get_total_price() for item in self.items.all())
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
+    main = models.ForeignKey(CompChoices, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=1)
+
+
+    def get_total_price(self):
+        return self.product.price * self.quantity

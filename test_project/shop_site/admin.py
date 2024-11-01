@@ -177,3 +177,5 @@ admin.site.register(Showcomp)
 admin.site.register(CompChoices)
 admin.site.register(Cart)
 admin.site.register(CartItem)
+admin.site.register(UserProfile)
+

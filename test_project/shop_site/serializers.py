@@ -46,6 +46,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ['id', 'first_name', 'last_name', 'age', 'phone_number']
 
+class UserProfileSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['first_name', 'last_name']
+
 
 class Processor_elementSimpleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -555,6 +560,24 @@ class Headset_categoryListSerializer(serializers.ModelSerializer):
 
 
 class ShowCompSerializer(serializers.ModelSerializer):
+    procecor = Processor_categorySimpleSerializer(many=True)
+    cooling = Cooling_categorySimpleSerializer(many=True)
+    memory = Random_access_memory_categorySimpleSerializer(many=True)
+    motherboard = The_motherboard_categorySimpleSerializer(many=True)
+    video_card = Video_card_categorySimpleSerializer(many=True)
+    hard_drive = Hard_drive_categorySimpleSerializer(many=True)
+    ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
+    ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
+    dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
+    body_category = Body_categoryListSerializer(many=True)
+    power_unit = Power_unit_categoryListSerializer(many=True)
+    wi_fi = Wi_Fi_categoryListSerializer(many=True)
+    sound_card = Sound_card_categoryListSerializer(many=True)
+    operating_system = Operating_system_categoryListSerializer(many=True)
+    mouse = Mouse_catergoryListSerializer(many=True)
+    keyboard = Keyboard_categoryListSerializer(many=True)
+    manitor = Manitor_categoryListSerializer(many=True)
+    headset = Headset_categoryListSerializer(many=True)
 
     class Meta:
         model = Showcomp
@@ -588,12 +611,10 @@ class CompChoicesSerializer(serializers.ModelSerializer):
 
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = CompChoicesSerializer(read_only=True)
-    product_id = serializers.PrimaryKeyRelatedField(queryset=CompChoices.objects.all(), write_only=True, source='comp_choices')
 
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'product_id', 'quantity', 'get_total_price']
+        fields = ['id', 'quantity', 'get_total_price']
 
 
 
@@ -602,6 +623,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(read_only=True, many=True)
     total_price = serializers.SerializerMethodField()
+    user = UserProfileSimpleSerializer()
 
     class Meta:
         model = Cart

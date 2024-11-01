@@ -79,13 +79,6 @@ class SSD_drive_2_categoryAdmin(admin.ModelAdmin):
     inlines = [SSD_drive_2_elementInlines]
 
 
-class DVD_drive_elementInlines(admin.TabularInline):
-    model = DVD_drive_element
-    extra = 0
-
-
-class DVD_drive_categoryAdmin(admin.ModelAdmin):
-    inlines = [DVD_drive_elementInlines]
 
 
 admin.site.register(Processor_category,Processor_categoryAdmin)
@@ -96,7 +89,6 @@ admin.site.register(Video_card_category,Video_card_categoryAdmin)
 admin.site.register(Hard_drive_category,Hard_drive_categoryAdmin)
 admin.site.register(SSD_drive_1_category,SSD_drive_1_categoryAdmin)
 admin.site.register(SSD_drive_2_category,SSD_drive_2_categoryAdmin)
-admin.site.register(DVD_drive_category,DVD_drive_categoryAdmin)
 
 
 

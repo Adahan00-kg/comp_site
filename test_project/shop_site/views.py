@@ -381,25 +381,6 @@ class SSD_drive_2_elementListViewSet(viewsets.ModelViewSet):
     queryset = SSD_drive_2_element.objects.all()
     serializer_class = SSD_drive_2_elementSimpleSerializer
 
-
-class DVD_drive_categoryViewSet(viewsets.ModelViewSet):
-    queryset = DVD_drive_category.objects.all()
-    serializer_class = DVD_drive_categorySerializer
-
-class DVD_drive_categoryListViewSet(viewsets.ModelViewSet):
-    queryset = DVD_drive_category.objects.all()
-    serializer_class = DVD_drive_categorySimpleSerializer
-
-class DVD_drive_elementDetailViewSet(viewsets.ModelViewSet):
-    queryset = DVD_drive_element.objects.all()
-    serializer_class = DVD_drive_elementSerializer
-
-class DVD_drive_elementListViewSet(viewsets.ModelViewSet):
-    queryset = DVD_drive_element.objects.all()
-    serializer_class = DVD_drive_elementSimpleSerializer
-
-
-
 class ShowcompViewSet(viewsets.ModelViewSet):
     queryset = Showcomp.objects.all()
     serializer_class = ShowCompSerializer

@@ -72,11 +72,7 @@ class SSD_drive_2_category(models.Model):  # SSD диск 2
         return self.ssd_2_category_name
 
 
-class DVD_drive_category(models.Model):  #DVD-привод
-    dvd_drive_category_name = models.CharField(max_length=100, unique=True)
 
-    def __str__(self):
-        return self.dvd_drive_category_name
 
 
 class Processor_element(models.Model):
@@ -239,17 +235,6 @@ class SSD_drive_2_element(models.Model):
         return self.ssd_2_element_name
 
 
-class DVD_drive_element(models.Model):
-    middle_dvd_drive_conaction = models.ForeignKey(DVD_drive_category, related_name='middle_dvd_drive_conaction',
-                                                   on_delete=models.CASCADE)
-    dvd_element_name = models.CharField(max_length=100)
-    type_of_drive = models.CharField(max_length=100, verbose_name='Тип привода', null=True, blank=True)
-    connection_interface = models.CharField(max_length=100, verbose_name='Интерфейс подключения', null=True, blank=True)
-    price = models.PositiveSmallIntegerField(default=0)
-    images = models.ImageField(upload_to='dvd_element_images', null=True, blank=True)
-
-    def __str__(self):
-        return self.dvd_element_name
 
 
 class Headset_category(models.Model):
@@ -544,8 +529,6 @@ class CompChoices(models.Model):
                                     null=True, blank=True)
     ssd_drive_2 = models.ForeignKey(SSD_drive_2_category, on_delete=models.CASCADE, verbose_name='SSD диск 2',
                                     null=True, blank=True)
-    dvd_drive = models.ForeignKey(DVD_drive_category, on_delete=models.CASCADE, verbose_name='DVD привод', null=True,
-                                  blank=True)
     body_category = models.ForeignKey(Body_category, on_delete=models.CASCADE, verbose_name='корпус', null=True,
                                       blank=True)
     power_unit = models.ForeignKey(Power_unit_category, on_delete=models.CASCADE, verbose_name='блок питания',
@@ -575,7 +558,6 @@ class Showcomp(models.Model):
     hard_drive = models.ManyToManyField(Hard_drive_category, verbose_name='жесткий диск', null=True, blank=True)
     ssd_drive_1 = models.ManyToManyField(SSD_drive_1_category, verbose_name='SSD диск 1', null=True, blank=True)
     ssd_drive_2 = models.ManyToManyField(SSD_drive_2_category, verbose_name='SSD диск 2', null=True, blank=True)
-    dvd_drive = models.ManyToManyField(DVD_drive_category, verbose_name='DVD привод', null=True, blank=True)
     body_category = models.ManyToManyField(Body_category, verbose_name='корпус', null=True, blank=True)
     power_unit = models.ManyToManyField(Power_unit_category, verbose_name='блок питания', null=True, blank=True)
     wi_fi = models.ManyToManyField(Wi_Fi_category, verbose_name='wi-fi', null=True, blank=True)

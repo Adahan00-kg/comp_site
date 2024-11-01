@@ -280,33 +280,6 @@ class SSD_drive_2_categorySimpleSerializer(serializers.ModelSerializer):
 
 
 
-class DVD_drive_elementSimpleSerializer(serializers. ModelSerializer):
-    class Meta:
-        model = DVD_drive_element
-        fields = ['id', 'dvd_element_name', 'price']
-
-class DVD_drive_elementSerializer(serializers. ModelSerializer):
-    class Meta:
-        model = DVD_drive_element
-        fields = ['id', 'dvd_element_name', 'images', 'type_of_drive', 'connection_interface',
-                  'price']
-
-
-class DVD_drive_categorySerializer(serializers.ModelSerializer):
-    middle_dvd_drive_conaction = DVD_drive_elementSimpleSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = DVD_drive_category
-        fields = ['id', 'dvd_drive_category_name', 'middle_dvd_drive_conaction']
-
-
-class DVD_drive_categorySimpleSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = DVD_drive_category
-        fields = ['dvd_drive_category_name']
-
-
 class Body_elementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Body_element
@@ -568,7 +541,6 @@ class ShowCompSerializer(serializers.ModelSerializer):
     hard_drive = Hard_drive_categorySimpleSerializer(many=True)
     ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
     ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
-    dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
     body_category = Body_categoryListSerializer(many=True)
     power_unit = Power_unit_categoryListSerializer(many=True)
     wi_fi = Wi_Fi_categoryListSerializer(many=True)
@@ -593,7 +565,6 @@ class CompChoicesSerializer(serializers.ModelSerializer):
     hard_drive = Hard_drive_categorySimpleSerializer(many=True)
     ssd_drive_1 = SSD_drive_1_categorySimpleSerializer(many=True)
     ssd_drive_2 = SSD_drive_2_categorySimpleSerializer(many=True)
-    dvd_drive = DVD_drive_categorySimpleSerializer(many=True)
     body_category = Body_categoryListSerializer(many=True)
     power_unit = Power_unit_categoryListSerializer(many=True)
     wi_fi = Wi_Fi_categoryListSerializer(many=True)
